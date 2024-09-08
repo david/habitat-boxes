@@ -9,10 +9,11 @@ RUN apt-get --assume-yes update && \
     apt-get --assume-yes dist-upgrade && \
     apt-get --assume-yes install --no-install-recommends build-essential git
 
-ENV USER_ID=1111
+ENV USER_ID=1000
 
-RUN useradd -u "${USER_ID}" --create-home --shell /bin/bash --user-group linuxbrew && \
-    echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers && \
+RUN userdel -r ubuntu && \
+    useradd -u "${USER_ID}" --create-home --shell /bin/bash --user-group linuxbrew && \
+    echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
     su - linuxbrew -c 'mkdir ~/.linuxbrew'
 
 USER linuxbrew
@@ -23,6 +24,5 @@ RUN curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.s
 USER root
 
 RUN chown root:root /home/linuxbrew && \
-    chmod 0755 /home/linuxbrew
-
-CMD sudo chown -R "$(whoami):$(whoami)" /home/linuxbrew/.linuxbrew
+    chmod 0755 /home/linuxbrew && \
+    userdel linuxbrew
