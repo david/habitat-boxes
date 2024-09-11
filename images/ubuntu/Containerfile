@@ -19,7 +19,8 @@ RUN userdel -r ubuntu && \
 USER linuxbrew
 ENV NONINTERACTIVE=1 
 
-RUN curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
+RUN curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash && \
+    brew install elixir
 
 USER root
 
