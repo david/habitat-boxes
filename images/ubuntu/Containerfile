@@ -17,10 +17,11 @@ RUN userdel -r ubuntu && \
     su - linuxbrew -c 'mkdir ~/.linuxbrew'
 
 USER linuxbrew
-ENV NONINTERACTIVE=1 
 
-RUN curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash && \
-    /home/linuxbrew/.linuxbrew/bin/brew install elixir
+ENV NONINTERACTIVE=1
+RUN curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
+
+RUN /home/linuxbrew/.linuxbrew/bin/brew install elixir
 
 USER root
 
