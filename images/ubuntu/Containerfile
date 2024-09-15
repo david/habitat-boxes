@@ -5,9 +5,9 @@ LABEL com.github.containers.toolbox="true" \
       summary="A cloud-native terminal experience" \
       maintainer="david@davidleal.com"
 
-RUN apt-get --assume-yes update && \
-    apt-get --assume-yes dist-upgrade && \
-    apt-get --assume-yes install --no-install-recommends build-essential git
+RUN apt-get update --assume-yes && \
+    apt-get dist-upgrade --assume-yes && \
+    apt-get install --assume-yes --no-install-recommends git
 
 ENV USER_ID=1000
 
@@ -21,10 +21,7 @@ USER linuxbrew
 ENV NONINTERACTIVE=1
 RUN curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
 
-RUN /home/linuxbrew/.linuxbrew/bin/brew install elixir
+RUN eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)" && \
+    brew install gcc
 
-USER root
-
-RUN chown root:root /home/linuxbrew && \
-    chmod 0755 /home/linuxbrew && \
-    userdel linuxbrew
+RUN userdel linuxbrew
