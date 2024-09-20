@@ -7,7 +7,7 @@ LABEL com.github.containers.toolbox="true" \
 
 RUN apt-get update --assume-yes && \
     apt-get dist-upgrade --assume-yes && \
-    apt-get install --assume-yes --no-install-recommends git
+    apt-get install --assume-yes --no-install-recommends build-essential procps curl file git
 
 ENV USER_ID=1000
 
