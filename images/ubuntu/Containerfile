@@ -24,4 +24,6 @@ RUN curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.s
 RUN eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)" && \
     brew install gcc
 
+USER root
+
 RUN userdel linuxbrew
